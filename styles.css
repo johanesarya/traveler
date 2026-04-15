@@ -411,7 +411,7 @@ body {
   .entry-card .card-title {
     /* Font lebih kecil dan ramping di HP */
     font-size: 1.1rem !important;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
   }
 
   /* .entry-card .card-desc {
@@ -428,8 +428,15 @@ body {
   .entry-card .card-pill {
     /* Mengecilkan pill lokasi */
     padding: 2px 8px;
-    font-size: 7px;
-    margin-bottom: 6px;
+    font-size: 4px;
+    margin-bottom: 3px;
+  }
+
+  .entry-card .card-cta {
+    /* Tombol CTA lebih kecil dan tidak terlalu mencolok di HP */
+    padding: 2px 8px;
+    font-size: 5px;
+    background: rgba(255, 255, 255, 0.9);
   }
 
   /* Membuat gradien sedikit lebih tinggi di HP untuk keterbacaan teks putih */
