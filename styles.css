@@ -1,0 +1,441 @@
+:root {
+  --background: #f9f9f8;
+  --primary: #75584e;
+  --surface-low: #f3f4f3;
+  --on-surface: #2f3333;
+}
+body {
+  background-color: var(--background);
+  color: var(--on-surface);
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+.serif {
+  font-family: "Newsreader", serif;
+}
+.glass-nav {
+  background: rgba(249, 249, 248, 0.8);
+  backdrop-filter: blur(12px);
+}
+.fade-in {
+  animation: fadeIn 1.2s ease-out forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Choropleth Map ── */
+#map-container {
+  width: 100%;
+  aspect-ratio: 21/9;
+  position: relative;
+  background: #f3f4f3;
+  border-radius: 2px;
+  overflow: hidden;
+}
+#map-container svg {
+  width: 100%;
+  height: 100%;
+}
+.province {
+  stroke: #e8eae8;
+  stroke-width: 0.5;
+  transition:
+    fill 0.25s ease,
+    stroke 0.25s ease,
+    filter 0.25s ease;
+  cursor: pointer;
+}
+.province:hover {
+  stroke: #75584e;
+  stroke-width: 1.2;
+  filter: brightness(0.88);
+}
+.province.unvisited {
+  fill: #dddedd;
+}
+.province.visited-1 {
+  fill: #c4a89e;
+}
+.province.visited-2 {
+  fill: #b08878;
+}
+.province.visited-3 {
+  fill: #9a6e5e;
+}
+.province.home {
+  fill: #75584e;
+}
+#map-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(47, 51, 51, 0.92);
+  color: #f9f9f8;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 2px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  z-index: 10;
+}
+#map-tooltip.visible {
+  opacity: 1;
+}
+#map-legend {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #5c605f;
+}
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+#province-count {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #5c605f;
+  opacity: 0.7;
+}
+
+/* ── Entry Cards (updated for 4:3) ── */
+.entry-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #1a1a18;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 0.68, 0, 1.2),
+    box-shadow 0.35s ease;
+}
+.entry-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+}
+.entry-card img.card-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.22, 0.68, 0, 1.2);
+}
+.entry-card:hover img.card-bg {
+  transform: scale(1.06);
+}
+.entry-card .card-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15, 12, 10, 0.88) 0%,
+    rgba(15, 12, 10, 0.35) 55%,
+    transparent 100%
+  );
+}
+.entry-card .card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 22px 20px;
+  color: #f9f9f8;
+}
+.entry-card .card-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.entry-card .card-title {
+  font-family: "Newsreader", serif;
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  font-style: italic;
+  line-height: 1.15;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.entry-card .card-desc {
+  font-size: 11px;
+  line-height: 1.6;
+  opacity: 0.75;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.entry-card .card-cta {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 0;
+  background: rgba(255, 255, 255, 0.95);
+  color: #2f3333;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+.entry-card:hover .card-cta {
+  background: #fff;
+}
+
+/* ── Modal ── */
+#entry-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#entry-modal.open {
+  opacity: 1;
+  pointer-events: all;
+}
+#entry-modal .modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 12, 10, 0.72);
+  backdrop-filter: blur(8px);
+}
+#entry-modal .modal-box {
+  position: relative;
+  z-index: 1;
+  background: #f9f9f8;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+  transform: translateY(24px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(0.22, 0.68, 0, 1.2);
+}
+#entry-modal.open .modal-box {
+  transform: translateY(0) scale(1);
+}
+.modal-hero {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  background: #1a1a18;
+}
+.modal-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease;
+}
+.modal-hero .modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s;
+  z-index: 2;
+}
+.modal-hero .modal-nav:hover {
+  background: #fff;
+}
+.modal-hero .modal-nav.prev {
+  left: 12px;
+}
+.modal-hero .modal-nav.next {
+  right: 12px;
+}
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  background: rgba(15, 12, 10, 0.5);
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+.modal-close:hover {
+  background: rgba(15, 12, 10, 0.8);
+}
+.modal-gallery-strip {
+  display: flex;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #f3f4f3;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.modal-gallery-strip::-webkit-scrollbar {
+  display: none;
+}
+.modal-gallery-strip img {
+  height: 58px;
+  width: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.6;
+  border: 2px solid transparent;
+  flex-shrink: 0;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s;
+}
+.modal-gallery-strip img.active {
+  opacity: 1;
+  border-color: #75584e;
+}
+.modal-content {
+  padding: 24px 28px 32px;
+}
+.modal-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.modal-location {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #75584e;
+  font-weight: 700;
+}
+.modal-date {
+  font-size: 10px;
+  opacity: 0.4;
+}
+.modal-title {
+  font-family: "Newsreader", serif;
+  font-size: 2rem;
+  font-style: italic;
+  color: #2f3333;
+  margin-bottom: 14px;
+  line-height: 1.15;
+}
+.modal-desc {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: #5c605f;
+}
+/* Force 4:3 only on Mobile */
+@media (max-width: 767px) {
+  .entry-card {
+    aspect-ratio: 4 / 3;
+    height: auto !important; /* Overrides the JS inline height */
+  }
+
+  .entry-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+  }
+
+  .entry-card img.card-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image fills the 4:3 or large box perfectly */
+    display: block;
+    transition: transform 0.7s cubic-bezier(0.22, 0.68, 0, 1.2);
+  }
+
+  .entry-card .card-body {
+    /* Mengurangi padding agar area gambar lebih lega */
+    padding: 16px 14px 12px;
+  }
+
+  .entry-card .card-title {
+    /* Font lebih kecil dan ramping di HP */
+    font-size: 1.1rem !important;
+    margin-bottom: 2px;
+  }
+
+  .entry-card .card-desc {
+    /* Font deskripsi lebih kecil agar tidak makan tempat */
+    font-size: 9px !important;
+    line-height: 1.4;
+    -webkit-line-clamp: 1; /* Hanya tampilkan 1 baris di HP */
+    opacity: 0.85;
+  }
+
+  .entry-card .card-pill {
+    /* Mengecilkan pill lokasi */
+    padding: 2px 8px;
+    font-size: 7px;
+    margin-bottom: 6px;
+  }
+
+  /* Membuat gradien sedikit lebih tinggi di HP untuk keterbacaan teks putih */
+  .entry-card .card-gradient {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.4) 40%,
+      transparent 100%
+    );
+  }
+}

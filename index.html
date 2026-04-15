@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en" style="scroll-behavior: smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Indonesian Sojourn | The Curator</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="antialiased">
+    <!-- ── Nav ── -->
+    <nav
+      class="fixed top-0 w-full z-50 glass-nav px-8 py-6 flex justify-between items-center"
+    >
+      <a href="#Main" class="serif text-2xl italic tracking-tight font-medium"
+        >The Curator</a
+      >
+      <div
+        class="flex gap-8 items-center uppercase text-[10px] tracking-[0.2em] font-semibold"
+      >
+        <a href="#Curated" class="hover:text-[#75584e] transition-colors"
+          >Journeys</a
+        >
+        <a href="#Contact" class="hover:text-[#75584e] transition-colors"
+          >Contact</a
+        >
+      </div>
+    </nav>
+
+    <main id="Main" class="pt-32">
+      <!-- ── Hero Header ── -->
+      <header class="px-8 mb-20 fade-in">
+        <h1 class="serif text-7xl mb-6 tracking-tight">Indonesian Sojourn</h1>
+        <p class="max-w-xl text-sm leading-relaxed text-[#5c605f]">
+          A digital cartography of memories across the archipelago—from the
+          emerald slopes of Ubud to the sapphire depths of Raja Ampat.
+        </p>
+      </header>
+
+      <!-- ── Indonesia Choropleth Map ── -->
+      <section class="px-8 mb-32 fade-in" style="animation-delay: 0.2s">
+        <div class="flex justify-between items-end mb-6">
+          <div>
+            <span
+              class="uppercase text-[10px] tracking-widest opacity-50 block mb-1"
+              >Cartography</span
+            >
+            <h2 class="serif text-3xl">Places Visited</h2>
+          </div>
+          <p
+            class="text-[10px] tracking-wider uppercase opacity-40 hidden md:block"
+          >
+            Hover over a province to explore
+          </p>
+        </div>
+        <div id="map-container">
+          <svg id="indonesia-map"></svg>
+          <div id="map-tooltip"></div>
+          <div id="map-legend">
+            <div class="legend-item">
+              <div class="legend-swatch" style="background: #75584e"></div>
+              Home Province
+            </div>
+            <div class="legend-item">
+              <div class="legend-swatch" style="background: #b08878"></div>
+              Visited
+            </div>
+            <div class="legend-item">
+              <div class="legend-swatch" style="background: #dddedd"></div>
+              Not Yet
+            </div>
+          </div>
+          <div id="province-count">Indonesia &bull; 38 Provinces</div>
+        </div>
+      </section>
+
+      <!-- ── Curated Entries ── -->
+      <section class="px-8 pb-32">
+        <div class="flex justify-between items-end mb-12">
+          <div>
+            <span
+              class="uppercase text-[10px] tracking-widest opacity-50 block mb-2"
+              >Archive 01</span
+            >
+            <h2 id="Curated" class="serif text-4xl">Curated Entries</h2>
+          </div>
+        </div>
+        <div
+          id="entries-grid"
+          class="grid grid-cols-1 md:grid-cols-12 gap-6"
+        ></div>
+      </section>
+
+      <!-- ── Subscribe ── -->
+      <section class="bg-[#f3f4f3] py-32 px-8 text-center">
+        <div class="max-w-2xl mx-auto">
+          <h3 class="serif text-5xl mb-6">Follow us on Social</h3>
+          <p
+            class="text-sm leading-relaxed text-[#5c605f] mb-12 max-w-sm mx-auto"
+          >
+            Looking for the cutest feeds Insta? Follow us on social:
+          </p>
+
+          <div id="Contact" class="flex justify-center items-center gap-8">
+            <a
+              href="https://www.instagram.com/catharinalouisaa/"
+              class="group transition-all duration-300 transform hover:scale-110"
+            >
+              <div
+                class="w-12 h-12 rounded-full border border-[#2f3333]/10 flex items-center justify-center group-hover:bg-[#75584e] group-hover:border-[#75584e] transition-colors"
+              >
+                <div
+                  class="w-12 h-12 rounded-full border border-[#2f3333]/10 flex items-center justify-center group-hover:bg-[#75584e] group-hover:border-[#75584e] transition-colors"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="text-[#2f3333] group-hover:text-white transition-colors"
+                  >
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="py-12 px-8 border-t border-[#2f3333]/5 text-[10px] uppercase tracking-[0.2em] flex justify-center items-center opacity-50"
+    >
+      <span>&copy; 2026 | Johanes Arya & Catharina Louisa.</span>
+    </footer>
+
+    <!-- ── Entry Modal ── -->
+    <div id="entry-modal" role="dialog" aria-modal="true">
+      <div class="modal-backdrop" id="modal-backdrop"></div>
+      <div class="modal-box">
+        <div class="modal-hero">
+          <img id="modal-hero-img" src="" alt="" />
+          <button
+            class="modal-nav prev"
+            id="modal-prev"
+            aria-label="Previous photo"
+          >
+            &#8249;
+          </button>
+          <button
+            class="modal-nav next"
+            id="modal-next"
+            aria-label="Next photo"
+          >
+            &#8250;
+          </button>
+          <button class="modal-close" id="modal-close" aria-label="Close">
+            &times;
+          </button>
+        </div>
+        <div class="modal-gallery-strip" id="modal-strip"></div>
+        <div class="modal-content">
+          <div class="modal-meta">
+            <span class="modal-location" id="modal-location"></span>
+            <span class="modal-date" id="modal-date"></span>
+          </div>
+          <h2 class="modal-title" id="modal-title"></h2>
+          <p class="modal-desc" id="modal-desc"></p>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
