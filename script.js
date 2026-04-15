@@ -4,7 +4,7 @@
       ═══════════════════════════════════════════════ */
 const travelEntries = [
   {
-    title: "Pulau Panjang",
+    title: "Long Island",
     location: "Jepara",
     date: "April 12, 2026",
     description:
@@ -18,7 +18,7 @@ const travelEntries = [
     ],
   },
   {
-    title: "Pantai Bandengan",
+    title: "Bandengan Beach",
     location: "Jepara",
     date: "March 29, 2026",
     description:
@@ -32,7 +32,7 @@ const travelEntries = [
     ],
   },
   {
-    title: "Cooking Class: Pizza",
+    title: "Cooking Pizza",
     location: "Semarang",
     date: "March 24, 2026",
     description:

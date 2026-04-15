@@ -425,10 +425,6 @@ body {
     display: none;
   }
 
-  .entry-card .card-cta {
-    display: none;
-  }
-
   .entry-card .card-pill {
     /* Mengecilkan pill lokasi */
     padding: 2px 8px;
