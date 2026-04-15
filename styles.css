@@ -414,12 +414,15 @@ body {
     margin-bottom: 2px;
   }
 
-  .entry-card .card-desc {
-    /* Font deskripsi lebih kecil agar tidak makan tempat */
+  /* .entry-card .card-desc {
+    /* Font deskripsi lebih kecil agar tidak makan tempat 
     font-size: 9px !important;
     line-height: 1.4;
     -webkit-line-clamp: 1; /* Hanya tampilkan 1 baris di HP */
-    opacity: 0.85;
+  /* opacity: 0.85; */
+
+  .entry-card .card-desc {
+    display: none;
   }
 
   .entry-card .card-pill {
