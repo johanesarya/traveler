@@ -425,11 +425,15 @@ body {
     display: none;
   }
 
-  .entry-card .card-pill {
+  /* .entry-card .card-pill {
     /* Mengecilkan pill lokasi */
-    padding: 2px 8px;
+  /* padding: 2px 8px;
     font-size: 7px;
     margin-bottom: 6px;
+}*/
+
+  .entry-card .card-pill {
+    display: none;
   }
 
   /* Membuat gradien sedikit lebih tinggi di HP untuk keterbacaan teks putih */
