@@ -441,3 +441,19 @@ function initMap(visitedProvinces) {
 lucide.createIcons();
 renderEntries();
 initMap(buildVisitedProvinces(travelEntries));
+
+window.addEventListener("load", () => {
+  const audio = document.getElementById("bg-music");
+
+  // Try autoplay
+  audio.play().catch(() => {
+    // Fallback if browser blocks autoplay
+    document.addEventListener(
+      "click",
+      () => {
+        audio.play();
+      },
+      { once: true },
+    );
+  });
+});
