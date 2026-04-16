@@ -73,7 +73,7 @@ const travelEntries = [
       "assets/sala4.jpg",
       "assets/sala5.png",
       "assets/sala6.png",
-      "assets/sala7.jpg",
+      "assets/sala7.JPG",
       "assets/sala8.png",
       "assets/sala9.png",
     ],
